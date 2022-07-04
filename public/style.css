@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+}
+
+ul {
+    background-color: grey;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px 0;
+}
+
+li {
+    color: white;
+    list-style: none;
+    font-weight: bold;
+    font-size: large;
+    flex-direction: row;
+}
+
+article {
+    display: flex;
+    margin: 3vw;
+}
+
+.article {
+    flex-direction: row;
+    border: 1px solid black;
+}
