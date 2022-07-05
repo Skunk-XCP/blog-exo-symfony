@@ -1,22 +1,18 @@
-{% include '_header.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    {#    La boucle permet d'afficher l'intégralité des articles #}
+    {% for article in articles %}
+        <article>
+            <h1>{{ article.title }}</h1>
+            <p>{{ article.description }}</p>
+            <img src="{{ article.image }}" alt="">
+            <div class="lien">
+                <a href={{ path('article', {'id': article.id }) }}>Voir le détail de l'article</a>
+            </div>
+        </article>
+    {% endfor %}
 
 
-
-{#    La boucle permet d'afficher l'intégralité des articles #}
-{% for article in articles %}
-    <article>
-        <h1>{{ article.title }}</h1>
-        <p>{{ article.description }}</p>
-        <img src="{{ article.image }}" alt="">
-        <div class="lien">
-            <a href={{ path('article', {'id': article.id }) }}>Voir le détail de l'article</a>
-        </div>
-    </article>
-{% endfor %}
-
-
-
-
-
-
-{% include '_footer.html.twig' %}
+{% endblock %}

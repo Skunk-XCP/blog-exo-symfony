@@ -1,17 +1,18 @@
-{% include '_header.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block main %}
 
 
 
-{% for article in articles %}
-    <article>
-        <h1>{{ article.title }}</h1>
-        <p>{{ article.description }}</p>
-        <img src="{{ article.image }}" alt="">
-        <a href={{ path('article', {'id': article.id }) }}>Voir le détail de l'article</a>
-    </article>
-{% endfor %}
+    {% for article in articles %}
+        <article>
+            <h1>{{ article.title }}</h1>
+            <p>{{ article.description }}</p>
+            <img src="{{ article.image }}" alt="">
+            <a href={{ path('article', {'id': article.id }) }}>Voir le détail de l'article</a>
+        </article>
+    {% endfor %}
 
 
 
-
-{% include '_footer.html.twig' %}
+{% endblock %}

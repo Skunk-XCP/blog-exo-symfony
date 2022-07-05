@@ -1,13 +1,14 @@
-{% include '_header.html.twig' %}
+{% extends 'base.html.twig' %}
 
+{% block main %}
 
-<article>
+    <article>
 
         <h1>{{ articles.title }}</h1>
         <p>{{ articles.description }}</p>
         <img src="{{ articles.image }}" alt="">
 
-</article>
+    </article>
 
 
-{% include '_footer.html.twig' %}
+{% endblock %}
