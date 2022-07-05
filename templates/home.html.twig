@@ -1,16 +1,16 @@
 {% include '_header.html.twig' %}
 
 
-<article>
 
-    {% for article in articles %}
+{% for article in articles %}
+    <article>
         <h1>{{ article.title }}</h1>
         <p>{{ article.description }}</p>
         <img src="{{ article.image }}" alt="">
         <a href={{ path('article', {'id': article.id }) }}>Voir le détail de l'article</a>
-    {% endfor %}
+    </article>
+{% endfor %}
 
-</article>
 
 
 
