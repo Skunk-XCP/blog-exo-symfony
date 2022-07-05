@@ -66,6 +66,12 @@ img {
     width: 70vw;
 }
 
-
+footer {
+    background-color: black;
+    text-align: center;
+    color: white;
+    padding: 2% 0;
+    font-weight: bold;
+}
 
 

@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    <title>{{ "Articles" }}</title>
+{% endblock %}
+
 {% block main %}
 
     {#    La boucle permet d'afficher l'intégralité des articles #}
@@ -15,4 +19,8 @@
     {% endfor %}
 
 
+{% endblock %}
+
+{% block footer %}
+    <footer>Coucou, je suis le footer de la liste d'articles</footer>
 {% endblock %}

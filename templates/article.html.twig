@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    <title>{{ articles.title }}</title>
+{% endblock %}
+
 {% block main %}
 
     <article>
@@ -11,4 +15,8 @@
     </article>
 
 
+{% endblock %}
+
+{% block footer %}
+    <footer>Coucou, je suis le footer de l'article</footer>
 {% endblock %}
