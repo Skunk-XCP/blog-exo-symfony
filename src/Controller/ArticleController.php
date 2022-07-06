@@ -104,7 +104,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @route("/insert-article", name="insert_article")
+     * @Route("/insert-article", name="insert_article")
      *
      */
 
