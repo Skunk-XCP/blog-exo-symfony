@@ -16,11 +16,27 @@ class Article
      * @ORM\GeneratedValue()
      */
 
-//    on crée une entité à laquelle on va mapper les annotations grâce à l'ORM
+//    on crée une table à laquelle on va mapper les annotations grâce à l'ORM
     public $id;
 
     /**
      * @ORM\Column(type="string")
      */
     public $title;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $image;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    public $isPublished;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $author;
 }
+
