@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity()
  */
+//on crée une classe Article
 class Article
 {
     /**
@@ -14,6 +15,8 @@ class Article
      * @ORM\Id()
      * @ORM\GeneratedValue()
      */
+
+//    on crée une entité à laquelle on va mapper les annotations grâce à l'ORM
     public $id;
 
     /**
