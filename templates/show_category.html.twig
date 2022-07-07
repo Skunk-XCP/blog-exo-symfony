@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+
+{% block main %}
+    <article>
+        <h2 style="color: {{ category.color }};">{{ category.title }}</h2>
+        <p>{{ category.description }}</p>
+    </article>
+{% endblock %}
+
+
+{% block footer %}
+    <footer>Coucou, je suis le footer</footer>
+{% endblock %}
+

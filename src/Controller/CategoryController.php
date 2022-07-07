@@ -54,8 +54,19 @@ class CategoryController extends AbstractController
     public function showArticleList(CategoryRepository $categoryRepository)
     {
 
-        $category = $categoryRepository->findAll();
+        $categories = $categoryRepository->findAll();
 
-        return $this->render("Category.html.twig", ['category' => $category]);
+        return $this->render("categories_list.html.twig", ['categories' => $categories]);
     }
+
+    /**
+     * @Route("/categories/{id}", name="show_category")
+     */
+    public function showCategory($id, CategoryRepository $categoryRepository)
+    {
+        $category = $categoryRepository->find($id);
+
+        return $this->render('show_category.html.twig', ['category' => $category]);
+    }
+
 }
