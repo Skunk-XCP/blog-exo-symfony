@@ -18,19 +18,19 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article", name="article")
      */
-public function showArticle(ArticleRepository $articleRepository)
-{
-    // récupérer depuis la base de données un article
-    // en fonction d'un ID
-    // donc SELECT * FROM article where id = xxx
+    public function showArticle(ArticleRepository $articleRepository)
+    {
+        // récupérer depuis la base de données un article
+        // en fonction d'un ID
+        // donc SELECT * FROM article where id = xxx
 
-    // la classe Repository me permet de faire des requête SELECT
-    // dans la table associée
-    // la méthode permet de récupérer un élément par rapport à son id
-    $article = $articleRepository->find(1);
+        // la classe Repository me permet de faire des requête SELECT
+        // dans la table associée
+        // la méthode permet de récupérer un élément par rapport à son id
+        $article = $articleRepository->find(1);
 
-    dd($article);
-}
+        dd($article);
+    }
 
     public function article($id)
     {
@@ -118,7 +118,7 @@ public function showArticle(ArticleRepository $articleRepository)
                 'id' => 4
             ],
         ];
-        return $this->render('articles.html.twig', ['articles'=>$articles]);
+        return $this->render('articles.html.twig', ['articles' => $articles]);
     }
 
     /**
@@ -127,23 +127,24 @@ public function showArticle(ArticleRepository $articleRepository)
      */
 
     public function insertArticle(EntityManagerInterface $entityManager)
-        {
+    {
 //            Création d'une instance de classe Article afin de pouvoir créer
 //            un nouvel article dans ma base de données
-            $article = new Article();
+        $article = new Article();
 
 //            Création du nouvel article (contenu) en utilisant les setters
 
-            $article->setTitle("Le tueur à la saucisse et au marteau");
-            $article->setContent("Le tueur de Cannes a encore frappé");
-            $article->setIsPublished(true);
-            $article->setAuthor("Michel Niouz");
+        $article->setTitle("Le tueur à la saucisse et au marteau");
+        $article->setContent("Le tueur de Cannes a encore frappé");
+        $article->setIsPublished(true);
+        $article->setAuthor("Michel Niouz");
 
 //            Utilisation  de la classe EntityManagerInterface pour enregister
 //            le nouvel article dans la bdd
-            $entityManager->persist($article);
-            $entityManager->flush();
+        $entityManager->persist($article);
+        $entityManager->flush();
 
-            dump($article); die;
-        }
+        dump($article);
+        die;
+    }
 }
