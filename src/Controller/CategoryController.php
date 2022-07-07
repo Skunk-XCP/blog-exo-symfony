@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends AbstractController
@@ -20,7 +21,6 @@ class CategoryController extends AbstractController
     {
         $category = new Category();
 
-// gngngnnnnnnnn je fé 1 AVC
 
         $category->setTitle("Rectification pour le tueur de Cannes");
         $category->setDescription("Le tueur n'utilise pas une saucisse mais bien une faucille, sinon il a toujours son marteau");
@@ -67,6 +67,26 @@ class CategoryController extends AbstractController
         $category = $categoryRepository->find($id);
 
         return $this->render('show_category.html.twig', ['category' => $category]);
+    }
+
+    /**
+     * @Route("/category/delete/{id}", name="delete_category")
+     */
+
+    public function deleteCategory($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager)
+    {
+        $category = $categoryRepository->find($id);
+
+        if (!is_null($category)) {
+
+            $entityManager->remove($category);
+            $entityManager->flush();
+
+            return new Response('Supprimé');
+        } else {
+
+            return new Response('Déjà supprimé');
+        }
     }
 
 }
