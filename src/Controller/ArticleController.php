@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -15,7 +17,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article/{id}", name="article")
      */
-    public function showArticle(ArticleRepository $articleRepository, $id )
+    public function showArticle(ArticleRepository $articleRepository, $id)
     {
         // récupérer depuis la base de données un article
         // en fonction d'un ID
@@ -72,5 +74,25 @@ class ArticleController extends AbstractController
 
         dump($article);
         die;
+    }
+
+    /**
+     * @Route("/articles/delete/{id}", name="delete_article")
+     */
+
+    public function deleteArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    {
+        $article = $articleRepository->find($id);
+
+        if (!is_null($article)) {
+
+            $entityManager->remove($article);
+            $entityManager->flush();
+
+            return new Response('Supprimé');
+        } else {
+
+            return new Response('Déjà supprimé');
+        }
     }
 }
