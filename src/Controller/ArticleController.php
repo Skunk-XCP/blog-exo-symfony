@@ -32,6 +32,23 @@ class ArticleController extends AbstractController
         dd($article);
     }
 
+    /**
+     * @Route("/article-list", name="article_list")
+     */
+    public function showArticleList(ArticleRepository $articleRepository)
+    {
+        // récupérer depuis la base de données un article
+        // en fonction d'un ID
+        // donc SELECT * FROM article where id = xxx
+
+        // la classe Repository me permet de faire des requête SELECT
+        // dans la table associée
+        // la méthode permet de récupérer un élément par rapport à son id
+        $article = $articleRepository->findAll();
+
+        dd($article);
+    }
+
     public function article($id)
     {
         $articles = [
