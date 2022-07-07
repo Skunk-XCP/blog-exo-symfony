@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,9 +11,26 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
 {
+//    /**
+//     * @Route("/article/{id}", name="article")
+//     */
+
     /**
-     * @Route("/article/{id}", name="article")
+     * @Route("/article", name="article")
      */
+public function showArticle(ArticleRepository $articleRepository)
+{
+    // récupérer depuis la base de données un article
+    // en fonction d'un ID
+    // donc SELECT * FROM article where id = xxx
+
+    // la classe Repository me permet de faire des requête SELECT
+    // dans la table associée
+    // la méthode permet de récupérer un élément par rapport à son id
+    $article = $articleRepository->find(1);
+
+    dd($article);
+}
 
     public function article($id)
     {
@@ -57,9 +75,9 @@ class ArticleController extends AbstractController
         return $this->render('article.html.twig', ['articles' => $articles[$id]]);
     }
 
-    /**
-     * @Route("/articles", name="articles")
-     */
+//    /**
+//     * @Route("/articles", name="articles")
+//     */
     public function articles()
     {
         $articles = [
