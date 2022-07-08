@@ -11,7 +11,7 @@
         <article>
             <h1>{{ article.title }}</h1>
             <div class="lien">
-                <a href={{ path('article', {'id': article.id }) }}>Voir le détail de l'article</a>
+                <a href={{ path('admin_article', {'id': article.id }) }}>Voir le détail de l'article</a>
             </div>
         </article>
     {% endfor %}

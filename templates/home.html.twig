@@ -8,7 +8,7 @@
         <article>
             <h1>{{ article.title }}</h1>
 
-            <a href={{ path('article', {'id': article.id }) }}>Voir le détail de l'article</a>
+            <a href={{ path('admin_article', {'id': article.id }) }}>Voir le détail de l'article</a>
         </article>
     {% endfor %}
 
