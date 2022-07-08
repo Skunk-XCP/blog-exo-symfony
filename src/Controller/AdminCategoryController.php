@@ -27,6 +27,8 @@ class AdminCategoryController extends AbstractController
         $category->setDescription("Le tueur n'utilise pas une saucisse mais bien une faucille, sinon il a toujours son marteau");
         $category->setIsPublished(true);
 
+        $this->addFlash('success','La catégorie a été ajoutée');
+
 
 //            Sauvegarde dans la BDD
         $entityManager->persist($category);
@@ -82,6 +84,7 @@ class AdminCategoryController extends AbstractController
             $entityManager->remove($category);
             $entityManager->flush();
 
+            $this->addFlash('success','La catégorie a été supprimée');
             return $this->redirectToRoute('admin_category_list');
         } else {
 

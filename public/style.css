@@ -74,4 +74,21 @@ footer {
     font-weight: bold;
 }
 
+.message-error {
+    font-size: 3vh;
+    padding: 1% 0;
+    font-weight: bold;
+    text-align: center;
+    border: 3px solid darkred;
+    background-color: red;
+}
+
+.message-success {
+    font-size: 3vh;
+    padding: 1% 0;
+    font-weight: bold;
+    text-align: center;
+    border: 3px solid darkgreen;
+    background-color: green;
+}
 
