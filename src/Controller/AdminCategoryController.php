@@ -10,10 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CategoryController extends AbstractController
+class AdminCategoryController extends AbstractController
 {
     /**
-     * @Route("/insert-category", name="insert_category")
+     * @Route("/admin/insert-category", name="admin_insert_category")
      *
      */
 
@@ -36,7 +36,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/category", name="category")
+     * @Route("/admin/category", name="admin_category")
      *
      */
     public function showCategory(CategoryRepository $categoryRepository)
@@ -48,7 +48,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/category-list", name="category_list")
+     * @Route("/admin/category-list", name="admin_category_list")
      *
      */
     public function showCategoryList(CategoryRepository $categoryRepository)
@@ -56,21 +56,21 @@ class CategoryController extends AbstractController
 
         $categories = $categoryRepository->findAll();
 
-        return $this->render("categories_list.html.twig", ['categories' => $categories]);
+        return $this->render("Admin/categories_list.html.twig", ['categories' => $categories]);
     }
 
     /**
-     * @Route("/categories/{id}", name="show_category")
+     * @Route("/admin/categories/{id}", name="admin_show_category")
      */
     public function showCategorySingle($id, CategoryRepository $categoryRepository)
     {
         $category = $categoryRepository->find($id);
 
-        return $this->render('show_category.html.twig', ['category' => $category]);
+        return $this->render('Admin/show_category.html.twig', ['category' => $category]);
     }
 
     /**
-     * @Route("/category/delete/{id}", name="delete_category")
+     * @Route("/admin/category/delete/{id}", name="admin_delete_category")
      */
 
     public function deleteCategory($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager)
