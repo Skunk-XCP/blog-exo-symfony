@@ -43,11 +43,11 @@ class AdminArticleController extends AbstractController
         // la classe Repository me permet de faire des requête SELECT
         // dans la table associée
         // la méthode permet de récupérer un élément par rapport à son id
+
         $articles = $articleRepository->findAll();
 
         return $this->render("admin/articles.html.twig", ['articles' => $articles]);
     }
-
 
     /**
      * @Route("/admin/insert-article", name="admin_insert_article")
@@ -72,8 +72,7 @@ class AdminArticleController extends AbstractController
         $entityManager->persist($article);
         $entityManager->flush();
 
-        dump($article);
-        die;
+        return $this->redirectToRoute('admin_article_list');
     }
 
     /**
@@ -89,7 +88,7 @@ class AdminArticleController extends AbstractController
             $entityManager->remove($article);
             $entityManager->flush();
 
-            return new Response('Supprimé');
+            return $this->redirectToRoute('admin_article_list');
         } else {
 
             return new Response('Déjà supprimé');

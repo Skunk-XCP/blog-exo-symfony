@@ -5,6 +5,7 @@
     <article>
         <h2 style="color: {{ category.color }};">{{ category.title }}</h2>
         <p>{{ category.description }}</p>
+        <a href="{{ path ('admin_delete_category',{'id':category.id })}}">Voulez-vous supprimer cet article? </a>
     </article>
 {% endblock %}
 

@@ -32,21 +32,20 @@ class AdminCategoryController extends AbstractController
         $entityManager->persist($category);
         $entityManager->flush();
 
-        dump($category);
-        die;
+        return $this->redirectToRoute('admin_category_list');
     }
 
-    /**
-     * @Route("/admin/category", name="admin_category")
-     *
-     */
-    public function showCategory(CategoryRepository $categoryRepository)
-    {
-
-        $category = $categoryRepository->find(1);
-
-        dd($category);
-    }
+//    /**
+//     * @Route("/admin/category", name="admin_category")
+//     *
+//     */
+//    public function showCategory(CategoryRepository $categoryRepository)
+//    {
+//
+//        $category = $categoryRepository->find(1);
+//
+//        dd($category);
+//    }
 
     /**
      * @Route("/admin/category-list", name="admin_category_list")
@@ -61,22 +60,11 @@ class AdminCategoryController extends AbstractController
     }
 
     /**
-     * @Route("/admin/categories/{id}", name="admin_show_category")
+     * @Route("/admin/category/{id}", name="admin_show_category")
      */
     public function showCategorySingle($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager)
     {
         $category = $categoryRepository->find($id);
-
-        if (!is_null($category)) {
-
-            $entityManager->remove($category);
-            $entityManager->flush();
-
-            return new Response('Supprimé');
-        } else {
-
-            return new Response('Déjà supprimé');
-        }
 
         return $this->render('Admin/show_category.html.twig', ['category' => $category]);
     }
@@ -94,7 +82,7 @@ class AdminCategoryController extends AbstractController
             $entityManager->remove($category);
             $entityManager->flush();
 
-            return new Response('Supprimé');
+            return $this->redirectToRoute('admin_category_list');
         } else {
 
             return new Response('Déjà supprimé');
