@@ -7,6 +7,7 @@
     <article>
         <h2 style="color: {{ category.color }};">{{ category.title }}</h2>
         <a href="{{ path('admin_show_category', {'id': category.id}) }}">Voir plus</a>
+        <a href="{{ path ('admin_show_category',{'id':category.id })}}">Voulez-vous supprimer cet article? </a>
     </article>
     {% endfor %}
 {% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Category;
+use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -62,9 +63,20 @@ class AdminCategoryController extends AbstractController
     /**
      * @Route("/admin/categories/{id}", name="admin_show_category")
      */
-    public function showCategorySingle($id, CategoryRepository $categoryRepository)
+    public function showCategorySingle($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager)
     {
         $category = $categoryRepository->find($id);
+
+        if (!is_null($category)) {
+
+            $entityManager->remove($category);
+            $entityManager->flush();
+
+            return new Response('Supprimé');
+        } else {
+
+            return new Response('Déjà supprimé');
+        }
 
         return $this->render('Admin/show_category.html.twig', ['category' => $category]);
     }
