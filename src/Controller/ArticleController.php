@@ -95,4 +95,20 @@ class ArticleController extends AbstractController
             return new Response('Déjà supprimé');
         }
     }
+
+    /**
+     * @Route("/articles/update/{id}", name="update_article")
+     */
+
+    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    {
+        $article = $articleRepository->find($id);
+
+        $article->setTitle("Stardew Valley");
+
+        $entityManager->persist($article);
+        $entityManager->flush();
+
+        return new Response('OK');
+    }
 }

@@ -39,7 +39,7 @@ class CategoryController extends AbstractController
      * @Route("/category", name="category")
      *
      */
-    public function showArticle(CategoryRepository $categoryRepository)
+    public function showCategory(CategoryRepository $categoryRepository)
     {
 
         $category = $categoryRepository->find(1);
@@ -51,7 +51,7 @@ class CategoryController extends AbstractController
      * @Route("/category-list", name="category_list")
      *
      */
-    public function showArticleList(CategoryRepository $categoryRepository)
+    public function showCategoryList(CategoryRepository $categoryRepository)
     {
 
         $categories = $categoryRepository->findAll();
@@ -62,7 +62,7 @@ class CategoryController extends AbstractController
     /**
      * @Route("/categories/{id}", name="show_category")
      */
-    public function showCategory($id, CategoryRepository $categoryRepository)
+    public function showCategorySingle($id, CategoryRepository $categoryRepository)
     {
         $category = $categoryRepository->find($id);
 
