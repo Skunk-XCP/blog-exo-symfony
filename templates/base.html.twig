@@ -13,15 +13,17 @@
 </head>
 <body>
 
-<header>
-    <div class="navbar">
-        <ul>
-            <li><a href="{{ path('home') }}">Accueil</a></li>
-            <li><a href="{{ path('admin_article_list') }}">Articles</a></li>
-            <li><a href="{{ path('admin_category_list') }}">Category</a></li>
-        </ul>
-    </div>
-</header>
+{% block header %}
+    <header>
+        <div class="navbar">
+            <ul>
+                <li><a href="{{ path('home') }}">Accueil</a></li>
+                <li><a href="{{ path('admin_article_list') }}">Articles</a></li>
+                <li><a href="{{ path('admin_category_list') }}">Category</a></li>
+            </ul>
+        </div>
+    </header>
+{% endblock %}
 
 {% for message in app.flashes('success') %}
     <p class="message-success">{{ message }}</p>

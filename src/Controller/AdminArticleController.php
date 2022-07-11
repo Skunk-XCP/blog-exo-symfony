@@ -7,6 +7,7 @@ use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -54,27 +55,39 @@ class AdminArticleController extends AbstractController
      *
      */
 
-    public function insertArticle(EntityManagerInterface $entityManager)
+    public function insertArticle(EntityManagerInterface $entityManager, Request $request)
     {
-//            Création d'une instance de classe Article afin de pouvoir créer
-//            un nouvel article dans ma base de données
-        $article = new Article();
+        // Je récupère les setters définis dans le dossier Entity/Article.php
+        $title = $request->query->get('title');
+        $description = $request->query->get('content');
+        $author = $request->query->get('author');
+
+        //Je vérifie si les champs de l'article sont vides, et je crée mon nouvel article
+        if (!empty($title) &&
+            !empty($description)) {
+            $article = new Article();
 
 //            Création du nouvel article (contenu) en utilisant les setters
 
-        $article->setTitle("Le tueur à la saucisse et au marteau");
-        $article->setContent("Le tueur de Cannes a encore frappé");
-        $article->setIsPublished(true);
-        $article->setAuthor("Michel Niouz");
+            $article->setTitle($title);
+            $article->setDescription($description);
+            $article->setIsPublished(true);
+//    $article->setPublishedAt(new \DateTime('NOW'));
+            $article->setAuthor($author);
 
 //            Utilisation  de la classe EntityManagerInterface pour enregister
 //            le nouvel article dans la bdd
-        $entityManager->persist($article);
-        $entityManager->flush();
+            $entityManager->persist($article);
+            $entityManager->flush();
 
-        $this->addFlash('success',"L'article a été ajouté");
+            // J'affiche un message si mon article a été ajouté
+            $this->addFlash('success', "L'article a été ajouté");
+            return $this->redirectToRoute('admin_article_list');
+        }
+        // sinon, je mets un message d'erreur
+        $this->addFlash('error', 'Merci de remplir le titre et le contenu !');
+        return $this->render('Admin/insert_article.html.twig');
 
-        return $this->redirectToRoute('admin_article_list');
     }
 
     /**
@@ -90,11 +103,11 @@ class AdminArticleController extends AbstractController
             $entityManager->remove($article);
             $entityManager->flush();
 
-            $this->addFlash('success',"L'article a été supprimé");
+            $this->addFlash('success', "L'article a été supprimé");
             return $this->redirectToRoute('admin_article_list');
         } else {
 
-            return new Response('Déjà supprimé');
+            $this->addFlash('error', "Element introuvable");
         }
     }
 

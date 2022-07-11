@@ -3,51 +3,17 @@
 namespace App\Controller;
 
 
+
 use App\Entity\Category;
-use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminCategoryController extends AbstractController
 {
-    /**
-     * @Route("/admin/insert-category", name="admin_insert_category")
-     *
-     */
-
-    public function insertCategory(EntityManagerInterface $entityManager)
-    {
-        $category = new Category();
-
-
-        $category->setTitle("Rectification pour le tueur de Cannes");
-        $category->setDescription("Le tueur n'utilise pas une saucisse mais bien une faucille, sinon il a toujours son marteau");
-        $category->setIsPublished(true);
-
-        $this->addFlash('success','La catégorie a été ajoutée');
-
-
-//            Sauvegarde dans la BDD
-        $entityManager->persist($category);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('admin_category_list');
-    }
-
-//    /**
-//     * @Route("/admin/category", name="admin_category")
-//     *
-//     */
-//    public function showCategory(CategoryRepository $categoryRepository)
-//    {
-//
-//        $category = $categoryRepository->find(1);
-//
-//        dd($category);
-//    }
 
     /**
      * @Route("/admin/category-list", name="admin_category_list")
@@ -88,8 +54,47 @@ class AdminCategoryController extends AbstractController
             return $this->redirectToRoute('admin_category_list');
         } else {
 
-            return new Response('Déjà supprimé');
+            $this->addFlash('error',"Element introuvable");
         }
     }
+
+    /**
+     * @Route("/admin/insert-category", name="admin_insert_category")
+     *
+     */
+
+    public function insertCategory(EntityManagerInterface $entityManager, Request $request)
+    {
+        // Je récupère les setters définis dans le dossier Entity/Catégorie.php
+        $title = $request->query->get('title');
+        $description = $request->query->get('content');
+
+        //Je vérifie si les champs de la catégorie sont vides, et je crée ma nouvelle catégorie
+        if (!empty($title) &&
+            !empty($description)){
+            $category = new Category();
+
+//            Création de la nouvelle categorie (contenu) en utilisant les setters
+
+            $category->setTitle($title);
+            $category->setDescription($description);
+            $category->setIsPublished(true);
+//            $category->setPublishedAt(new \DateTime('NOW'));
+
+//            Utilisation  de la classe EntityManagerInterface pour enregister
+//            la nouvelle catégorie dans la bdd
+            $entityManager->persist($category);
+            $entityManager->flush();
+
+            // J'affiche un message si ma catégorie a été ajouté
+            $this->addFlash('success', "La catégorie a été ajoutée");
+            return $this->redirectToRoute('admin_category_list');
+        }
+
+        // sinon j'affiche un mesage d'erreur
+        $this->addFlash('error', 'Merci de remplir le titre et le contenu !');
+        return $this->render('Admin/insert_category.html.twig');
+    }
+
 
 }
