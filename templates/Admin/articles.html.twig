@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block main %}
+    <a href="{{ path ('admin_insert_article')}}">Créer un article </a>
 
     {#    La boucle permet d'afficher l'intégralité des articles #}
     {% for article in articles %}
@@ -12,7 +13,6 @@
             <h1>{{ article.title }}</h1>
             <div class="lien">
                 <a href={{ path('admin_article', {'id': article.id }) }}>Voir le détail de l'article_</a>
-                <a href="{{ path ('admin_insert_article',{'id':article.id })}}">Créer un article_ </a>
                 <a href="{{ path ('admin_delete_article',{'id':article.id })}}">Voulez-vous supprimer cet article? </a>
             </div>
         </article>

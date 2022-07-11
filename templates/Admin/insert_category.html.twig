@@ -1,17 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-
-    <form action="{{ path('admin_insert_category') }}" method="get">
-        <label for="title">Titre</label>
-        <input type="text" name="title">
-
-        <label for="content">Contenu</label>
-        <input type="text" name="content">
-
-        <label for="author">Auteur</label>
-        <input type="text" name="author">
-
-        <input type="submit">
-    </form>
+    <div class="form_category">
+        {{ form(form) }}
+    </div>
 {% endblock %}

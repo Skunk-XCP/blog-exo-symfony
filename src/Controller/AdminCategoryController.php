@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-
-
 use App\Entity\Category;
+use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -65,36 +64,14 @@ class AdminCategoryController extends AbstractController
 
     public function insertCategory(EntityManagerInterface $entityManager, Request $request)
     {
-        // Je récupère les setters définis dans le dossier Entity/Catégorie.php
-        $title = $request->query->get('title');
-        $description = $request->query->get('content');
+        $category = new Category();
 
-        //Je vérifie si les champs de la catégorie sont vides, et je crée ma nouvelle catégorie
-        if (!empty($title) &&
-            !empty($description)){
-            $category = new Category();
+        $form = $this->createForm(CategoryType::class, $category);
 
-//            Création de la nouvelle categorie (contenu) en utilisant les setters
+        return $this->render("admin/insert_category.html.twig", ['form' => $form->createView()]);
 
-            $category->setTitle($title);
-            $category->setDescription($description);
-            $category->setIsPublished(true);
-//            $category->setPublishedAt(new \DateTime('NOW'));
-
-//            Utilisation  de la classe EntityManagerInterface pour enregister
-//            la nouvelle catégorie dans la bdd
-            $entityManager->persist($category);
-            $entityManager->flush();
-
-            // J'affiche un message si ma catégorie a été ajouté
-            $this->addFlash('success', "La catégorie a été ajoutée");
-            return $this->redirectToRoute('admin_category_list');
         }
 
-        // sinon j'affiche un mesage d'erreur
-        $this->addFlash('error', 'Merci de remplir le titre et le contenu !');
-        return $this->render('Admin/insert_category.html.twig');
     }
 
 
-}

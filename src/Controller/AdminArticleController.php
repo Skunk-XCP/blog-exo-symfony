@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use SebastianBergmann\CodeCoverage\Report\Xml\Report;
@@ -57,36 +58,11 @@ class AdminArticleController extends AbstractController
 
     public function insertArticle(EntityManagerInterface $entityManager, Request $request)
     {
-        // Je récupère les setters définis dans le dossier Entity/Article.php
-        $title = $request->query->get('title');
-        $description = $request->query->get('content');
-        $author = $request->query->get('author');
+        $article = new Article();
 
-        //Je vérifie si les champs de l'article sont vides, et je crée mon nouvel article
-        if (!empty($title) &&
-            !empty($description)) {
-            $article = new Article();
+        $form = $this->createForm(ArticleType::class, $article);
 
-//            Création du nouvel article (contenu) en utilisant les setters
-
-            $article->setTitle($title);
-            $article->setDescription($description);
-            $article->setIsPublished(true);
-//    $article->setPublishedAt(new \DateTime('NOW'));
-            $article->setAuthor($author);
-
-//            Utilisation  de la classe EntityManagerInterface pour enregister
-//            le nouvel article dans la bdd
-            $entityManager->persist($article);
-            $entityManager->flush();
-
-            // J'affiche un message si mon article a été ajouté
-            $this->addFlash('success', "L'article a été ajouté");
-            return $this->redirectToRoute('admin_article_list');
-        }
-        // sinon, je mets un message d'erreur
-        $this->addFlash('error', 'Merci de remplir le titre et le contenu !');
-        return $this->render('Admin/insert_article.html.twig');
+        return $this->render("admin/insert_article.html.twig", ['form' => $form->createView()]);
 
     }
 

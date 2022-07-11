@@ -92,3 +92,18 @@ footer {
     background-color: green;
 }
 
+.btn-category {
+    justify-content: center;
+    margin-top: 1%;
+}
+
+.btn-category-create {
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 10px 5px;
+}
+
+.form_article {
+    margin-left: 40vw;
+    padding: 2% 0;
+}
