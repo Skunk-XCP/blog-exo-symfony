@@ -1,7 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <div class="form_article">
-        {{ form(form) }}
-    </div>
+    {{ form_start(form) }}
+
+
+    {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+
+    {{ form_label(form.author, 'Auteur', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+
+    {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+
+    {{ form_label(form.category, 'Categorie', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+
+    {{ form_label(form.isPublished, 'Est publié ?', {'label_attr': {'class': 'form-check-label'}}) }}
+    {{ form_widget(form.isPublished, {'attr': {'class': 'form-check-label'}}) }}
+
+    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+
+    {{ form_end(form) }}
 {% endblock %}

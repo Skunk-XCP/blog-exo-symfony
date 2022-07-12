@@ -11,6 +11,7 @@ ul {
     display: flex;
     justify-content: space-evenly;
     padding: 10px 0;
+    width: 100%;
 }
 
 li {
@@ -36,11 +37,9 @@ article h1{
     font-size: 4vh;
     text-align: center;
     margin: 3%;
-
 }
 
 article p{
-    width: center;
     text-align: justify;
     padding: 0 10%;
     margin: 2%;
