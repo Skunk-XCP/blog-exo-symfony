@@ -2,12 +2,11 @@
 
 {% block main %}
     <div class="btn-category">
-
-    <a href="{{ path ('admin_insert_category')}}" class="btn-category-create">Créer Catégorie </a>
+        <a href="{{ path ('admin_insert_category')}}" class="btn-create">Créer Catégorie </a>
     </div>
 
     {% for category in categories %}
-        <article>
+        <article class="article">
             <h2 style="color: {{ category.color }};">{{ category.title }}</h2>
             <a href="{{ path('admin_show_category', {'id': category.id}) }}">Voir plus_</a>
             <a href="{{ path ('admin_delete_category',{'id':category.id })}}">Voulez-vous supprimer cet article? </a>

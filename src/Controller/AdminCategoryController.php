@@ -82,7 +82,7 @@ class AdminCategoryController extends AbstractController
             $this->addFlash('success', 'Categorie enregistrée');
         }
 
-        return $this->render("admin/insert_category.html.twig", ['form' => $form->createView()]);
+        return $this->render("admin/update_category.html.twig", ['form' => $form->createView()]);
 
         }
 

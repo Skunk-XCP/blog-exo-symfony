@@ -110,15 +110,31 @@ class AdminArticleController extends AbstractController
      * @Route("/admin/articles/update/{id}", name="admin_update_article")
      */
 
-    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request)
     {
         $article = $articleRepository->find($id);
 
-        $article->setTitle("Stardew Valley");
+        $form = $this->createForm(ArticleType::class, $article);
 
-        $entityManager->persist($article);
-        $entityManager->flush();
+        // on donne à la variable qui contient le formulaire
+        // une instance de la classe request
+        // pour que le formulaire puisse récupérer toutes les données
+        // des inputs et faire les setters sur  $article automatiquement
+        $form->handleRequest($request);
 
-        return new Response('OK');
+        // si le formulaire a été posté et que les données sont valides (valeurs
+        // des inputs correspondent à ce qui est attendu en bdd pour la table article)
+        if ($form->isSubmitted() && $form->isValid()) {
+            // alors on enregistre l'article en bdd
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Article enregistré');
+        }
+
+        // j'affiche mon twig, en lui passant la variable
+        // form, qui contient la vue du formulaire, c'est à dire,
+        // le résultat de la méthode createView de la variable $form
+        return $this->render("admin/insert_article.html.twig", ['form' => $form->createView()]);
     }
 }

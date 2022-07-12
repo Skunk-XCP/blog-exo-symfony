@@ -25,7 +25,7 @@ li>a {
     color: white;
 }
 
-article {
+.article {
     text-align: center;
     margin: 3vw;
     border: 1px solid black;
@@ -93,14 +93,16 @@ footer {
 }
 
 .btn-category {
+    display: flex;
     justify-content: center;
     margin-top: 1%;
 }
 
-.btn-category-create {
+.btn-create {
     border: 3px solid black;
     border-radius: 10px;
-    padding: 10px 5px;
+    padding: 15px 30px;
+    background-color: #9adcdf;
 }
 
 .form_article {

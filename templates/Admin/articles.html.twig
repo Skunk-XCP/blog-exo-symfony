@@ -1,18 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    <title>{{ "Articles" }}</title>
+        <title>{{ "Articles" }}</title>
 {% endblock %}
 
 {% block main %}
-    <a href="{{ path ('admin_insert_article')}}">Créer un article </a>
+     <div class="btn-category">
+         <a href="{{ path ('admin_insert_article')}}" class="btn-create">Créer un article </a>
+     </div>
 
     {#    La boucle permet d'afficher l'intégralité des articles #}
     {% for article in articles %}
-        <article>
+        <article class="article">
             <h1>{{ article.title }}</h1>
             <div class="lien">
                 <a href={{ path('admin_article', {'id': article.id }) }}>Voir le détail de l'article_</a>
+                <a href="{{ path ('admin_update_article',{'id':article.id })}}">Modifier cet article </a>
                 <a href="{{ path ('admin_delete_article',{'id':article.id })}}">Voulez-vous supprimer cet article? </a>
             </div>
         </article>
