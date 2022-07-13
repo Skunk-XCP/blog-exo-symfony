@@ -39,6 +39,9 @@ class Article
     private $content;
 
     /**
+     * Permet de créer une colonne "category'id" dans la base de données
+     * afin de pouvoir assigner un type de catégorie à un article
+     * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
      */
     private $category;

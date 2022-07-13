@@ -42,12 +42,15 @@ class Category
     private $isPublished;
 
     /**
+     * Je crée un lien entre les articles et les catégories
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
      */
     private $articles;
 
     public function __construct()
     {
+        // permet de récupérer tous les articles en fonction d'une catégorie
+        // dans un tableau afin d'éviter d'écraser un article déjà existant
         $this->articles = new ArrayCollection();
     }
 

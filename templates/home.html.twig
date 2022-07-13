@@ -5,7 +5,7 @@
 
 
     {% for article in lastArticles %}
-        <article>
+        <article class="article">
             <h1>{{ article.title }}</h1>
 
             <a href={{ path('admin_article', {'id': article.id }) }}>Voir le détail de l'article</a>
