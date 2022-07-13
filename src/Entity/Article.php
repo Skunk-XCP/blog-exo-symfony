@@ -25,6 +25,14 @@ class Article
 
     /**
      * @ORM\Column(type="boolean")
+     *
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 10,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     *
+     * @Assert\NotNull
      */
     private $isPublished;
 
@@ -115,17 +123,5 @@ class Article
         $this->category = $category;
     }
 
-    /**
-     * @Assert\NotNull
-     */
-
-    /**
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 10,
-     *      minMessage = "Your first name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
-     * )
-     */
 
 }
