@@ -6,18 +6,23 @@
 
     {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
     {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.title) }}
 
     {{ form_label(form.color, 'Couleur', {'label_attr': {'class': 'form-label'}}) }}
     {{ form_widget(form.color, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.color) }}
 
     {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'form-label'}}) }}
     {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.content) }}
 
     {{ form_label(form.category, 'Categorie', {'label_attr': {'class': 'form-label'}}) }}
     {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.category) }}
 
     {{ form_label(form.isPublished, 'Est publié ?', {'label_attr': {'class': 'form-check-label'}}) }}
     {{ form_widget(form.isPublished, {'attr': {'class': 'form-check-label'}}) }}
+    {{ form_errors(form.isPublished) }}
 
     {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
 
