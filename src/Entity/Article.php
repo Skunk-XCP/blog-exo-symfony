@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -41,7 +41,7 @@ class Article
     /**
      * Permet de créer une colonne "category'id" dans la base de données
      * afin de pouvoir assigner un type de catégorie à un article
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
      */
     private $category;

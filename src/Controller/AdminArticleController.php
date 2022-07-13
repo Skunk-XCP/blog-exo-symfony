@@ -137,4 +137,20 @@ class AdminArticleController extends AbstractController
         // le résultat de la méthode createView de la variable $form
         return $this->render("admin/insert_article.html.twig", ['form' => $form->createView()]);
     }
+
+    /**
+     * @Route("/admin/articles/search", name="admin_search_articles")
+     */
+    public function searchArticles(Request $request, ArticleRepository $articleRepository)
+    {
+        // Je récupère une valeur dans ma recherche
+        $search = $request->query->get('search');
+
+        // Je crée une méthode qui recherche une correspondance entre la valeur récupérée
+        // et un mot contenu dans le titre ou le contenu de l'article
+        $articles = $articleRepository->searchByWord($search);
+
+        // On retourne une réponse twig avec les articles trouvés et on les affiche
+        return $this->render('admin/search_articles.html.twig', ['articles' => $articles]);
+    }
 }

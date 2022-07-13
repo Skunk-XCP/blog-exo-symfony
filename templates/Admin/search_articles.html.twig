@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <section class="articles">
+
+        {% for article in articles %}
+
+            <article class="article">
+                <h1>{{ article.title }}</h1>
+                {% if article.category %}
+                    <p>{{ article.category.title }}</p>
+                {% else %}
+                    <p>Pas de catégorie</p>
+                {% endif %}
+                <a href={{ path('admin_article', {'id': article.id }) }}>Voir le détail de l'article_</a>
+                <a href="{{ path ('admin_update_article',{'id':article.id }) }}">Modifier cet article </a>
+                <a href="{{ path ('admin_delete_article',{'id':article.id }) }}">Voulez-vous supprimer cet
+                    article? </a>
+            </article>
+
+        {% endfor %}
+
+    </section>
+
+{% endblock %}
