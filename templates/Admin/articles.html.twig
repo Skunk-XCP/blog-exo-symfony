@@ -13,11 +13,14 @@
     {% for article in articles %}
         {% if article.isPublished %}
             <article class="article">
+                <img src="{{ asset('uploads/images/') ~ article.image }}" alt="{{ article.title }}"
+                     class="image-article">
+                <h1>{{ article.title }}</h1>
                 {# on vérifie si l'article publié a une catégorie,
                 s'il n'en a pas, on l'affichera sans catégorie #}
                 {% if article.category %}
                     {# défini une actégorie à un article #}
-                    <h1>{{ article.category.title }}</h1>
+                    <p>{{ (article.category.title) }}</p>
                 {% else %}
                     <p>Pas de catégorie</p>
                 {% endif %}

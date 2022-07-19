@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 class AdminArticleController extends AbstractController
@@ -56,7 +57,7 @@ class AdminArticleController extends AbstractController
      *
      */
 
-    public function insertArticle(EntityManagerInterface $entityManager, Request $request)
+    public function insertArticle(EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger)
     {
         $article = new Article();
 
@@ -68,9 +69,24 @@ class AdminArticleController extends AbstractController
         // des inputs et faire les setters sur  $article automatiquement
         $form->handleRequest($request);
 
+
+
         // si le formulaire a été posté et que les données sont valides (valeurs
         // des inputs correspondent à ce qui est attendu en bdd pour la table article)
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $image = $form->get('image')->getData();
+
+            $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+
+            $safeFilename = $slugger->slug($originalFilename);
+
+            $newFilename = $safeFilename."-".uniqid().'.'.$image->guessExtension();
+
+            $image->move($this->getParameter('images_directory'), $newFilename);
+
+            $article->setImage($newFilename);
+
             // alors on enregistre l'article en bdd
             $entityManager->persist($article);
             $entityManager->flush();
@@ -110,7 +126,7 @@ class AdminArticleController extends AbstractController
      * @Route("/admin/articles/update/{id}", name="admin_update_article")
      */
 
-    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request)
+    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger)
     {
         $article = $articleRepository->find($id);
 
@@ -122,9 +138,27 @@ class AdminArticleController extends AbstractController
         // des inputs et faire les setters sur  $article automatiquement
         $form->handleRequest($request);
 
+
         // si le formulaire a été posté et que les données sont valides (valeurs
         // des inputs correspondent à ce qui est attendu en bdd pour la table article)
         if ($form->isSubmitted() && $form->isValid()) {
+            // Je récupère l'image dans le formulaire
+            $image = $form->get('image')->getData();
+            //Je récupère le nom du fichier original
+            $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+            // L'instance de classe Slugger permet de suprrimer les caractères spéciaux, espaces du nom du fichier
+            $safeFilename = $slugger->slug($originalFilename);
+            // On ajoute un identifiant au nom de l'image au cas ou elle serait postée plusieurs fois
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+            // je déplace l'image dans le dossier public et je la renomme avec le nouveau nom créé
+            $image->move(
+                $this->getParameter('images_directory'),
+                $newFilename
+            );
+
+            $article->setImage($newFilename);
+
+
             // alors on enregistre l'article en bdd
             $entityManager->persist($article);
             $entityManager->flush();
@@ -135,7 +169,7 @@ class AdminArticleController extends AbstractController
         // j'affiche mon twig, en lui passant la variable
         // form, qui contient la vue du formulaire, c'est à dire,
         // le résultat de la méthode createView de la variable $form
-        return $this->render("admin/insert_article.html.twig", ['form' => $form->createView()]);
+        return $this->render("admin/update_article.html.twig", ['form' => $form->createView(), 'article' => $article]);
     }
 
     /**
