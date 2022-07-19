@@ -1,111 +1,112 @@
 * {
-    margin: 0;
-    box-sizing: border-box;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: cornsilk;
+  background-color: cornsilk;
 }
 
 ul {
-    background-color: black;
-    display: flex;
-    justify-content: space-evenly;
-    padding: 10px 0;
-    width: 100%;
+  background-color: black;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px 0;
+  width: 100%;
 }
 
 li {
-    color: white;
-    list-style: none;
-    font-weight: bold;
-    font-size: large;
-    flex-direction: row;
+  color: white;
+  list-style: none;
+  font-weight: bold;
+  font-size: large;
+  flex-direction: row;
 }
 
-li>a {
-    color: white;
+li > a {
+  color: white;
 }
 
 .article {
-    text-align: center;
-    margin: 3vw;
-    border: 1px solid black;
-    background-color: white;
+  text-align: center;
+  margin: 3vw;
+  border: 1px solid black;
+  background-color: #50b6c7;
 }
 
-article h1{
-    font-size: 4vh;
-    text-align: center;
-    margin: 3%;
+article h1 {
+  font-size: 4vh;
+  text-align: center;
+  margin: 3%;
 }
 
-article p{
-    text-align: justify;
-    padding: 0 10%;
-    margin: 2%;
+article p {
+  text-align: justify;
+  padding: 0 10%;
+  margin: 2%;
 }
 
 a {
-    outline: none;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    font-size: large;
+  outline: none;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: large;
 }
 
 .lien {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2%;
-
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2%;
 }
 
 img {
-    margin-top: 4%;
-    width: 30%;
+  margin-top: 4%;
+  width: 30%;
 }
 
 footer {
-    background-color: black;
-    text-align: center;
-    color: white;
-    padding: 2% 0;
-    font-weight: bold;
+  background-color: #50b6c7;
+  text-align: center;
+  color: white;
+  padding: 2% 0;
+  font-weight: bold;
 }
 
 .message-error {
-    font-size: 3vh;
-    padding: 1% 0;
-    font-weight: bold;
-    text-align: center;
-    border: 3px solid darkred;
-    background-color: red;
+  font-size: 3vh;
+  padding: 1% 0;
+  font-weight: bold;
+  text-align: center;
+  border: 3px solid darkred;
+  background-color: red;
 }
 
 .message-success {
-    font-size: 3vh;
-    padding: 1% 0;
-    font-weight: bold;
-    text-align: center;
-    border: 3px solid darkgreen;
-    background-color: green;
+  font-size: 3vh;
+  padding: 1% 0;
+  font-weight: bold;
+  text-align: center;
+  border: 3px solid darkgreen;
+  background-color: green;
 }
 
 .btn-category {
-    display: flex;
-    justify-content: center;
-    margin-top: 1%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1%;
 }
 
 .btn-create {
-    border: 3px solid black;
-    border-radius: 10px;
-    padding: 15px 30px;
-    background-color: #9adcdf;
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 15px 30px;
+  background-color: #9adcdf;
 }
 
 .form_article {
-    margin-left: 40vw;
-    padding: 2% 0;
+  margin-left: 40vw;
+  padding: 2% 0;
 }
+
+/*# sourceMappingURL=style.css.map */
