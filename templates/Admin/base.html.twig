@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+
+{% block header %}
+    <header>
+        <div class="navbar">
+            <ul>
+                <li><a href="{{ path('home') }}">Accueil</a></li>
+                <li><a href="{{ path('admin_article_list') }}">Articles</a></li>
+                <li><a href="{{ path('admin_category_list') }}">Categories</a></li>
+                <li><a href="{{ path ('app_login') }}">Connexion</a></li>
+                <li><a href="{{ path ('app_logout') }}">Déconnexion</a></li>
+            </ul>
+            <form method="get" action="{{ path ('admin_search_articles') }}">
+                <input type="text" name="search">
+                <input type="submit">
+            </form>
+            <p>Bonjour {{ app.user.email }}</p>
+        </div>
+    </header>
+{% endblock %}
+
+{% for message in app.flashes('success') %}
+    <p class="message-success">{{ message }}</p>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+    <p class="message-error">{{ message }}</p>
+{% endfor %}
+
+<main>
+
+    {% block main %}
+    {% endblock %}
+</body>
+</html>

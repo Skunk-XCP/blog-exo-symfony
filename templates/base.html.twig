@@ -16,29 +16,20 @@
 
 {% block header %}
     <header>
-        <form method="get" action="{{ path ('admin_search_articles') }}">
-            <input type="text" name="search">
-            <input type="submit">
-        </form>
         <div class="navbar">
             <ul>
                 <li><a href="{{ path('home') }}">Accueil</a></li>
-                <li><a href="{{ path('admin_article_list') }}">Articles</a></li>
-                <li><a href="{{ path('admin_category_list') }}">Categories</a></li>
+                <li><a href="{{ path('article_list') }}">Articles</a></li>
                 <li><a href="{{ path ('app_login')}}">Connexion</a></li>
                 <li><a href="{{ path ('app_logout')}}">Déconnexion</a></li>
             </ul>
+            <form method="get" action="{{ path ('admin_search_articles') }}">
+                <input type="text" name="search">
+                <input type="submit">
+            </form>
         </div>
     </header>
 {% endblock %}
-
-{% for message in app.flashes('success') %}
-    <p class="message-success">{{ message }}</p>
-{% endfor %}
-
-{% for message in app.flashes('error') %}
-    <p class="message-error">{{ message }}</p>
-{% endfor %}
 
 <main>
 
