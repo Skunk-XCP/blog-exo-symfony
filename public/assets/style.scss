@@ -1,5 +1,9 @@
 $theColor: #50b6c7;
 
+@mixin border {
+    border: 2px solid red;
+}
+
 * {
     margin: 0;
     box-sizing: border-box;
@@ -32,7 +36,7 @@ li>a {
 .article {
     text-align: center;
     margin: 3vw;
-    border: 1px solid black;
+    @include border;
     background-color: $theColor;
 }
 
@@ -69,7 +73,7 @@ img {
 }
 
 footer {
-    background-color: $theColor;
+    background-color: black;
     text-align: center;
     color: white;
     padding: 2% 0;
