@@ -2,6 +2,7 @@ $theColor: #50b6c7;
 
 @mixin border {
     border: 2px solid red;
+    border-radius: 15px;
 }
 
 * {
@@ -114,4 +115,16 @@ footer {
 .form_article {
     margin-left: 40vw;
     padding: 2% 0;
+}
+
+.dark-activated, p {
+    color: white;
+}
+
+.dark-activated {
+    background-color: #11203DFF;
+}
+
+.js-dark {
+    ackground-color: #11203DFF;
 }

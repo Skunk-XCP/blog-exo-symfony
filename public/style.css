@@ -31,6 +31,7 @@ li > a {
   text-align: center;
   margin: 3vw;
   border: 2px solid red;
+  border-radius: 15px;
   background-color: #50b6c7;
 }
 
@@ -107,6 +108,18 @@ footer {
 .form_article {
   margin-left: 40vw;
   padding: 2% 0;
+}
+
+.dark-activated, p {
+  color: white;
+}
+
+.dark-activated {
+  background-color: #11203d;
+}
+
+.js-dark {
+  ackground-color: #11203d;
 }
 
 /*# sourceMappingURL=style.css.map */

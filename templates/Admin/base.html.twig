@@ -10,7 +10,7 @@
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>Document</title>
 </head>
-<body>
+<body class="js-body">
 
 {% block header %}
     <header>
@@ -19,8 +19,9 @@
                 <li><a href="{{ path('home') }}">Accueil</a></li>
                 <li><a href="{{ path('admin_article_list') }}">Articles</a></li>
                 <li><a href="{{ path('admin_category_list') }}">Categories</a></li>
-{#                <li><a href="{{ path ('app_login') }}">Connexion</a></li>#}
+                {#                <li><a href="{{ path ('app_login') }}">Connexion</a></li> #}
                 <li><a href="{{ path ('app_logout') }}">Déconnexion</a></li>
+                <button class="js-dark">Dark Mode</button>
             </ul>
             <form method="get" action="{{ path ('admin_search_articles') }}">
                 <input type="text" name="search">
@@ -43,5 +44,13 @@
 
     {% block main %}
     {% endblock %}
+
+</main>
+
+    {% block footer %}
+    {% endblock %}
+
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+
 </body>
 </html>

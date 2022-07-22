@@ -12,7 +12,7 @@
     {% endblock %}
 
 </head>
-<body>
+<body class="js-body">
 
 {% block header %}
     <header>
@@ -22,6 +22,7 @@
                 <li><a href="{{ path('article_list') }}">Articles</a></li>
                 <li><a href="{{ path ('app_login')}}">Connexion</a></li>
 {#                <li><a href="{{ path ('app_logout')}}">Déconnexion</a></li>#}
+                <button class="js-dark">Dark Mode</button>
             </ul>
             <form method="get" action="{{ path ('admin_search_articles') }}">
                 <input type="text" name="search">
@@ -41,6 +42,6 @@
 {% block footer %}
 {% endblock %}
 
-
+<script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 </html>
